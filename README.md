@@ -1,5 +1,8 @@
-gocloudmonitoring
-=================
+Go Cloud Monitoring
+===================
+Not a fan of pyrax the CLI didn't feel very intiutave plus I prefer
+compiled binaries for shipping software.  This CLI tool has single
+commands and an interactive shell.
 
 ###External Dependencies
 This tool uses gpm for dependency management so you need to
