@@ -1,0 +1,21 @@
+# Ignore compiled artifacts
+/bin
+
+# Emacs save files
+*~
+
+# Vim-related files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# Go test binaries
+*.test
+
+# Vagrant
+.vagrant
+
+# Ignore .gopath
+.gopath
