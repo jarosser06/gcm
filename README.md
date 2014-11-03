@@ -1,8 +1,13 @@
 gocloudmonitoring
 =================
 
-###Commands
+###External Dependencies
+This tool uses gpm for dependency management so you need to
+ensure that it is installed in order to build from source.
 
+https://github.com/pote/gpm
+
+###Commands
 object verb optional attribute
 
 List Monitoring Account Information
