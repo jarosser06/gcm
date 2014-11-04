@@ -1,1 +1,3 @@
 github.com/rackspace/gophercloud v1.0.0
+github.com/mitchellh/mapstructure 740c764bc6149d3f1806231418adb9f52c11bcbf
+github.com/racker/perigee v0.0.0
