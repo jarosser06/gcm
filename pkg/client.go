@@ -5,7 +5,7 @@ import (
 	"github.com/rackspace/gophercloud/rackspace"
 )
 
-const RaxEndpoint = "https://monitoring.api.rackspacecloud.com/v1.0/"
+const monitoringEndpoint = "https://monitoring.api.rackspacecloud.com/v1.0/"
 
 type Client struct {
 	ProviderClient *gophercloud.ProviderClient
@@ -22,8 +22,12 @@ func NewClient(authOpts gophercloud.AuthOptions) Client {
 
 	client := Client{
 		ProviderClient: provider,
-		Endpoint:       RaxEndpoint,
+		Endpoint:       monitoringEndpoint,
 	}
 
 	return client
+}
+
+func (c *Client) EmptyTenant() bool {
+	return c.TenantID == ""
 }
