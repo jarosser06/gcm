@@ -2,9 +2,10 @@ package entity
 
 import (
 	"errors"
+	"fmt"
 
-	cloudmonitoring "github.com/jarosser06/gcm/pkg"
 	"github.com/racker/perigee"
+	"github.com/rackspace/gophercloud"
 )
 
 type Entity struct {
@@ -20,22 +21,25 @@ type EntityList struct {
 	Metadata map[string]string `json:"metadata"`
 }
 
-func GetEntity(client cloudmonitoring.Client, entityId int) (Entity, error) {
-	if client.EmptyTenant {
-		return _, errors.New("Tenant cannot be empty")
-	}
-
-	var res CreateResult
-
-	reqUrl := fmt.sprintf(
-		"%sentities/%s/",
-		cloudmonitoring.monitoringEndpoint,
+func GetEntity(client gophercloud.ServiceClient, entityId int) (Entity, error) {
+	var entity Entity
+	reqUrl := fmt.Sprintf(
+		"%s/entities/%s/",
+		client.ResourceBase,
 		entityId,
 	)
 
-	_, res.Err = perigee.Request("GET", reqUrl, perigee.Options{
-		MoreHeaders: client.AuthenticatedHeaders(),
-		Results:     res.Body,
+	_, err := perigee.Request("GET", reqUrl, perigee.Options{
+		MoreHeaders: client.ProviderClient.AuthenticatedHeaders(),
+		Results:     entity,
 		OkCodes:     []int{200},
 	})
+
+	if err != nil {
+		return Entity{}, errors.New(
+			fmt.Sprintf("Error during http request: %v", err),
+		)
+	}
+
+	return entity, nil
 }
